@@ -6,8 +6,8 @@ using namespace std;
 
 
 
-candyJar::candyJar(int capacity){
-capacity=this->capacity;
+candyJar::candyJar(int Capacity){
+capacity=Capacity;
 }
 
 candyJar::candyJar(double Width, double Height, int Capacity){
@@ -18,49 +18,63 @@ capacity=Capacity;
 
 
 
-candyJar candyJar::addCandy(candy& Candy,const candyJar& Jar){
-int Capacity = capacity-1;
+void candyJar::addCandy(candy& Candy,const candyJar& Jar){
+capacity-=1;
 
 if (Jar.capacity>Jar.AllCandy.size()){
-	AllCandy.push_back(Candy);
+	
 
-if (AllCandy.size()==1){
-	Candy.x=Candy.length;
-	Candy.y=Candy.width;
+	if (AllCandy.size()==0){
+		Candy.x=Candy.length;
+		Candy.y=Candy.width;
+
+	}
+
+	else if (AllCandy.size()>=1){
+
+		if ((Jar.width-AllCandy.back().x) > Candy.length ){
+			Candy.x=AllCandy.back().x+Candy.length;
+			Candy.y=AllCandy.back().y;
+												 }
+
+		else{ 
+			Candy.x=Candy.length;
+			Candy.y=AllCandy.back().y+Candy.width;
+			}
+
+	
+	}
+AllCandy.push_back(Candy);
+					   }
+
 }
 
-if(AllCandy.back().x < Jar.width){
-	Candy.x=AllCandy.back().x+Candy.length;
-	Candy.y=AllCandy.back().y;
-}
 
-else{ 
-	Candy.x=Candy.width;
-	Candy.y=AllCandy.back().y+Candy.width;
-}
 
-}
-return candyJar(Capacity);
-}
 
 
 
 
 int main(){
 
-candy Candy = { .width=10, .length=20, .x=15, .y=0};
+candy Candy1 = { .width=10, .length=20};
 
-candyJar Jar(30, 50, 40);
+candyJar Jar(40, 50, 40);
 
-Jar.addCandy(Candy, Jar);
+Jar.addCandy(Candy1, Jar);
+
+candy Candy2 = { .width=10, .length=20};
+
+Jar.addCandy(Candy2, Jar);
 
 cout<<"There is "<<Jar.AllCandy.size()<<" pieces of candy"<<endl;
 
-
-
-
+cout<<"They are at:";
+cout<<"("<<Candy1.x<<","<<Candy1.y<<")";
+cout<<"("<<Candy2.x<<","<<Candy2.y<<")"<<endl; 
 
 
 return 0;
 }
+
 

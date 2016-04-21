@@ -20,7 +20,7 @@ public:
 	candyJar(const double,const double,const int);
 	candyJar(const int);
 	//function for adding candy
-	candyJar addCandy(candy&, const candyJar&);
+	void addCandy(candy&, const candyJar&);
 	//a vector that stores candy
 	vector<candy> AllCandy;
 
